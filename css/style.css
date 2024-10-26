@@ -1,35 +1,171 @@
-body {
-    font-family: 'Poppins', serif;
-    background-color: #f1f1f1; /* Fallback color */
-    background-image: url('concrete_seamless.png');
+/* Animation Steps for my Logo Element */
+@keyframes logoanimation {
+    0% {
+        width: 25px;
+        opacity: 0;
+    }
+
+    100% {
+        width: 475px;
+        opacity: 1;
+    }
 }
 
-.card{
+/*logo animation*/
+#logo {
+    width: 25px;
+    height: auto;
+    opacity: 0;
+    animation: logoanimation 5s forwards;
+}
+
+/*Used Poppins font with serid as a backup font and image “concrete_seamless.png” as background-image with a backup color of #f1f1f1  */
+
+body {
+    font-family: 'Poppins', serif;
+    /*background-image*/
+    background-image: url("../images/concrete_seamless.png");
+    /* Fallback color */
+    background-color: #f1f1f1;
+}
+
+/*css for the header tag (all instances)*/
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+/*css for the nav_links class*/
+.nav_links {
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* preventing the links after being clicked on from changing color */
+.nav_links a:visited {
+    color: #0000ff;
+}
+
+
+/*styling only those header elements that are a direct child of a card class*/
+.card>header {
+    background: #288088;
+    border: solid 2px #45ADAD;
+    padding: 20px 0px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+
+}
+
+/*to ensure that the corners of the card are rounded*/
+.card {
+    border-radius: 50px;
     flex-basis: 450px;
 }
 
-.pricing{
+/*styling the pricing class to flex*/
+.pricing {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    /*align-items: center;*/
 }
-@media screen and (min-width: 900px){
-    header{
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/*styling images in the gallery class*/
+.gallery img {
+    border: 10px solid #50C7C7;
+    margin: 10px;
+    width: 300px;
+}
+
+@media screen and (min-width: 900px) {
+    header {
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-between;
     }
-    .nav_links{
+
+    .nav_links {
         flex-direction: row;
     }
-    /*step 12*/
-    .card{
+
+    .card {
         flex-basis: 275px;
     }
-    .pricing{
+
+    .pricing {
         align-items: center;
     }
-}
-@media all and (prefers-reduced-motion: reduce) {
 
+    /* Making the main header fixed at the top of the screen */
+    body>header {
+        position: sticky;
+        top: 0;
+    }
+}
+
+/* Override the animation when reduced motion is preferred */
+@media all and (prefers-reduced-motion: reduce) {
+    #logo {
+        animation: none;
+        /*final width*/
+        width: 475px;
+        /*final opacity*/
+        opacity: 1;
+    }
+}
+
+/*specifications when the page is printed in portrait mode*/
+
+@media print {
+
+    /*Changed the font of the  body element to Arial with a backup value of  Helvetica and the background image should is removed*/
+    body {
+        font-family: Arial, Helvetica;
+        background-image: none;
+    }
+
+    /*nav/nav_links elements are spaced evenly*/
+    nav {
+        width: 80%;
+    }
+
+    .nav_links {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .pricing {
+        flex-direction: row;
+        align-self: flex-start;
+        flex-flow: nowrap;
+    }
+
+    /*styling the card class to have a border of 2px solid #45ADDD and a flex-basis of 325px*/
+    .card {
+        border: 2px solid #45ADDD;
+        flex-basis: 325px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+    /* Hides the gallery in print preview mode */
+    #gallery,
+    .gallery {
+        display: none;
+    }
+
+    .card ul li:nth-child(2)::after {
+        content: "👍";
+    }
 }
